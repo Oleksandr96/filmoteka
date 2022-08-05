@@ -1,0 +1,76 @@
+<section class="main">
+  <form class="filters"
+        [formGroup]="filterForm"
+        (ngSubmit)="applyFilters()">
+
+    <label for="year">Year:</label>
+    <select id="year"
+            name="year"
+            formControlName="year"
+            class="select">
+      <option selected></option>
+      <option *ngFor="let year of filters?.years">
+        {{year}}
+      </option>
+    </select>
+
+    <label for="genre">Genre:</label>
+    <select id="genre"
+            name="genre"
+            formControlName="genre"
+            class="select"
+    >
+      <option  selected></option>
+      <option *ngFor="let genre of filters?.genres">
+        {{genre}}
+      </option>
+    </select>
+    <button class="warn-btn"
+            type="reset"
+            (click)="resetFilters()"
+    >
+      Reset
+    </button>
+    <button class="primary-btn"
+            type="submit"
+    >
+      Search...
+    </button>
+  </form>
+
+
+  <cdk-virtual-scroll-viewport class="scroll-viewport" #scrollViewport itemSize="20">
+    <table class="films">
+      <thead>
+      <tr>
+        <th style="width:10%">ID</th>
+        <th style="width:50%">Name</th>
+        <th style="width:20%">Genres</th>
+        <th style="width:20%">Year</th>
+      </tr>
+      </thead>
+
+      <tr class="film__item" *cdkVirtualFor="let film of films">
+        <td>
+          {{film.id}}
+        </td>
+        <td>
+          {{film.name}}
+        </td>
+        <td>
+          {{film.genre1}},
+          {{film.genre2}}
+        </td>
+        <td>
+          {{film.year}}
+        </td>
+      </tr>
+    </table>
+    <button
+      class="primary-btn scroll-btn"
+      (click)="loadMore()">
+      Load more
+    </button>
+  </cdk-virtual-scroll-viewport>
+
+</section>

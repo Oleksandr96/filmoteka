@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  box-sizing: border-box;
+  color: #f2f2f2;
+
+}
+
+body {
+  background: rgba(24, 24, 24, 0.9);
+  overflow-y: hidden;
+}
+
+h1 {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.primary-btn, .warn-btn {
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition-delay: .1s;
+
+  &:hover {
+    opacity: .9;
+    transition-delay: .1s;
+  }
+}
+
+.primary-btn {
+  background: green;
+}
+
+.warn-btn {
+  background: #f6a000;
+}
+
+.select {
+  width: 200px;
+  padding: 10px 20px;
+  font-size: 14px;
+  background: green;
+  border: 2px solid #000;
+  border-radius: 10px;
+  margin: 5px;
+  outline: none;
+  cursor: pointer;
+}
