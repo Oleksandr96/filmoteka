@@ -4,7 +4,7 @@ import { RoutesInterface } from "./routes.interface";
 export abstract class BaseController {
   private readonly _router: Router;
 
-  constructor() {
+  protected constructor() {
     this._router = Router();
   }
 
@@ -12,7 +12,7 @@ export abstract class BaseController {
     return this._router;
   }
 
-  protected bindRoutes(routes: RoutesInterface[]) {
+  protected bindRoutes(routes: RoutesInterface[]): void {
     for (const route of routes) {
       console.log(route);
       const handler = route.func.bind(this);
