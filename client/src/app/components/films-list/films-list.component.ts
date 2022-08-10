@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Film } from '../../interfaces/film.interface';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Filters } from '../../interfaces/filters.interface';
+import { FilterQuery } from '../../interfaces/filter-query.interface';
 
 @Component({
   selector: 'app-films-list',
@@ -40,19 +41,21 @@ export class FilmsListComponent implements OnInit, OnDestroy {
     this.filters$.unsubscribe();
   }
 
-  public fetch(filters: any | null): void {
-    let params: any = {
+  public fetch(query: FilterQuery): void {
+    if (query) {
+      !query.year ? delete query.year : false;
+      !query.genre ? delete query.genre : false;
+    }
+    Object.assign(query, {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
-    };
-    if (filters) {
-      filters.year ? (params.year = filters.year) : false;
-      filters.genre ? (params.genre = filters.genre) : false;
-    }
-
-    this.films$ = this.appFilmsService.fetch(params).subscribe((data: any) => {
-      this.films = this.films.concat(data);
     });
+
+    this.films$ = this.appFilmsService
+      .fetch(query)
+      .subscribe((data: Film[]) => {
+        this.films = this.films.concat(data);
+      });
   }
 
   loadMore(): void {
@@ -77,7 +80,7 @@ export class FilmsListComponent implements OnInit, OnDestroy {
     this.filterForm.reset();
     this.pageNumber = 0;
     this.films = [];
-    this.fetch(null);
+    this.fetch({});
     this.router.navigate(['/']);
   }
 }

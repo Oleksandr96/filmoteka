@@ -3,19 +3,21 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Film } from '../interfaces/film.interface';
 import { Filters } from '../interfaces/filters.interface';
+import { FilterQuery } from '../interfaces/filter-query.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppFilmsService {
-  API_URL: string = 'http://localhost:3000';
+  API_URL: string = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
-  public fetch(params: any = {}): Observable<Film[]> {
+  public fetch(params: FilterQuery): Observable<Film[]> {
     return this.http.get<Film[]>(`${this.API_URL}`, {
       params: new HttpParams({
-        fromObject: params,
+        fromObject: { ...params },
       }),
     });
   }
