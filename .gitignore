@@ -47,4 +47,5 @@ Thumbs.db
 client/node_modules/
 client/.angular/
 api/node_modules/
+api/dist/
 client/.vscode/

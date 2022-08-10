@@ -6,8 +6,7 @@
   "scripts": {
     "build": "tsc",
     "api-start:dev": "nodemon src/main.ts",
-    "api-start": "node ./dist/main.js",
-    "fe-start": "ng serve --prefix src/client/filmoteka"
+    "api-start": "node ./dist/main.js"
   },
   "author": "",
   "license": "ISC",
